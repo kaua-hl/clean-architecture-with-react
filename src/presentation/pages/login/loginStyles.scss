@@ -77,24 +77,6 @@ button {
       text-transform: uppercase;
     }
 
-    .inputWrap {
-      display: flex;
-      margin-top: 16px;
-      position: relative;
-      align-items: center;
-
-      input {
-        flex: 1;
-      }
-
-      .status {
-        position: absolute;
-        font-size: 12px;
-        right: 8px;
-        cursor: help;
-      }
-    }
-
     .submit {
       margin-top: 32px;
     }
@@ -126,6 +108,4 @@ button {
       }
     }
   }
-
-
 }
