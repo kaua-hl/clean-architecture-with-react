@@ -21,7 +21,7 @@ const Login: React.FC = () => {
   });
 
   return (
-    <div data-testid="error-wrap" className={styles.login}>
+    <div className={styles.login}>
       <LoginHeader />
       <Context.Provider value={state}>
         <form className={styles.form}>
@@ -32,7 +32,12 @@ const Login: React.FC = () => {
             name="password"
             placeholder="Digite sua senha"
           />
-          <button className={styles.submit} type="submit">
+          <button
+            disabled
+            data-testid="submit"
+            className={styles.submit}
+            type="submit"
+          >
             Entrar
           </button>
           <span className={styles.link}>Cadastre-se</span>
