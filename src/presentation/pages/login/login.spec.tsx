@@ -1,4 +1,5 @@
 import React from "react";
+import { createMemoryHistory } from "history";
 import {
   render,
   RenderResult,
@@ -11,6 +12,7 @@ import { ValidationStub, AuthenticationSpy } from "@/presentation/test";
 import faker from "@faker-js/faker";
 import "jest-localstorage-mock";
 import { InvalidCredentialError } from "@/domain/errors";
+import { BrowserRouter } from "react-router-dom";
 
 type SutTypes = {
   sut: RenderResult;
@@ -21,12 +23,15 @@ type SutParams = {
   validationError: string;
 };
 
+const history = createMemoryHistory();
 const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub();
   const authenticationSpy = new AuthenticationSpy();
   validationStub.errorMessage = params?.validationError;
   const sut = render(
-    <Login validation={validationStub} authentication={authenticationSpy} />
+    <BrowserRouter>
+      <Login validation={validationStub} authentication={authenticationSpy} />
+    </BrowserRouter>
   );
   return {
     sut,
@@ -178,5 +183,13 @@ describe("Login component", () => {
       "accessToken",
       authenticationSpy.account.accessToken
     );
+  });
+
+  test("Should go to signup page", () => {
+    const { sut } = makeSut();
+    const register = sut.getByTestId("signup");
+    fireEvent.click(register);
+    expect(window.history.length).toBe(2);
+    expect(window.location.pathname).toBe("/signup");
   });
 });
