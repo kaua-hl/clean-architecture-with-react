@@ -1,16 +1,16 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Login } from "@/presentation/pages";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { ValidationStub } from "@/presentation/test"; //Remover
+type Props = {
+  makeLogin: React.FC;
+};
 
-const Router: React.FC = () => {
-  const validationSpy = new ValidationStub(); //Remover
+const Router: React.FC<Props> = ({ makeLogin }: Props) => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login validation={validationSpy} />} />
-      </Routes>
+      <Switch>
+        <Route path="/login" exact component={makeLogin} />
+      </Switch>
     </BrowserRouter>
   );
 };
