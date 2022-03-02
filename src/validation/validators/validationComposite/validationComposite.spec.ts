@@ -1,4 +1,4 @@
-import { FieldValidationSpy } from "../test/mockFieldValidation";
+import { FieldValidationSpy } from "@/validation/test/mockFieldValidation";
 import { ValidationComposite } from "./validationComposite";
 import faker from "@faker-js/faker";
 import { ValidationBuilder as Builder } from "../builder/validationBuilder";
